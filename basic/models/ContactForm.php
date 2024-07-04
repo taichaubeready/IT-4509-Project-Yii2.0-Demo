@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use app\models\Contact;
 
 /**
  * ContactForm is the model behind the contact form.
@@ -61,5 +62,13 @@ class ContactForm extends Model
             return true;
         }
         return false;
+    }
+
+    /**
+     * Get All Contacts
+     *
+     */
+    public function getAllContacts(){
+        return Contact::find()->all();
     }
 }

@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\EntryForm;
+use app\models\Contact;
 
 class SiteController extends Controller
 {
@@ -106,7 +108,27 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
+
+       // $tbl_contact = $model->getAllContacts();
+
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+
+            // foreach ($tbl_contact as $key => $value) {
+            //     # code...
+
+            //     $command = Yii::$app->db->createCommand();
+
+            //     $command->insert('contact', ['name' => $value[0], 'email' => $value[1], 'subject' => $value[2], 'body' => $value[3]])->execute();
+            // }
+
+            // Tạo model Contact để thêm dữ liệu vào DB contact, khi user thao tác trên form Contact tại localhost:8000/site/contact
+            $new_contact = new Contact();
+            $new_contact->name = $model->name;
+            $new_contact->email = $model->email;
+            $new_contact->subject = $model->subject;
+            $new_contact->body = $model->body;
+            $new_contact->insert();
+
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
@@ -134,5 +156,21 @@ class SiteController extends Controller
     public function actionSay($message = 'Hello')
     {
         return $this->render('say', ['message' => $message]);
+    }
+
+    public function actionEntry()
+    {
+        $model = new EntryForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // valid data received in $model
+
+            // do something meaningful here about $model ...
+
+            return $this->render('entry-confirm', ['model' => $model]);
+        } else {
+            // either the page is initially displayed or there is some validation error
+            return $this->render('entry', ['model' => $model]);
+        }
     }
 }

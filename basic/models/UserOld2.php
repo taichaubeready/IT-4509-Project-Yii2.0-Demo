@@ -24,6 +24,21 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
+     * Get All Users
+     */
+    public function getAllUsers() {
+        return User::find()->all();
+    }
+
+    /**
+     * Get User By ID
+     */
+    public function getUserById($id) {
+        return User::findOne($id); // Get by Primary Key
+        // return User::find(['id' => $id])->all();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
@@ -33,7 +48,6 @@ class User extends \yii\db\ActiveRecord
             [['username', 'password', 'name'], 'string', 'max' => 30],
             [['email'], 'string', 'max' => 50],
             [['email'], 'unique'],
-            [['email'], 'email', 'message' => 'Ko dung dinh dang email']
         ];
     }
 
