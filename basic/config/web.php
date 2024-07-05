@@ -49,7 +49,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'lien-he' => 'site/contact',
-                'suffix' => '.html',
+                //'suffix' => '.html',
             ],
         ],
 
