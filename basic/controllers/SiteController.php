@@ -109,17 +109,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-       // $tbl_contact = $model->getAllContacts();
-
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-
-            // foreach ($tbl_contact as $key => $value) {
-            //     # code...
-
-            //     $command = Yii::$app->db->createCommand();
-
-            //     $command->insert('contact', ['name' => $value[0], 'email' => $value[1], 'subject' => $value[2], 'body' => $value[3]])->execute();
-            // }
 
             // Tạo model Contact để thêm dữ liệu vào DB contact, khi user thao tác trên form Contact tại localhost:8000/site/contact
             $new_contact = new Contact();

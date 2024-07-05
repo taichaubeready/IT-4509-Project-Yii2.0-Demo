@@ -1,10 +1,29 @@
 <?php
+require_once (__DIR__ . "/../vendor/autoload.php");
+
+use Symfony\Component\Dotenv\Dotenv;
+
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__ . '/../.env');
+
+$host = $_ENV['MYSQL_HOST'];
+$dbname = $_ENV['MYSQL_DATABASE'];
+$port = $_ENV['MYSQL_PORT'];
+$username = $_ENV['MYSQL_USER'];
+$password = $_ENV['MYSQL_PASSWORD'];
 
 return [
+    // 'class' => 'yii\db\Connection',
+    // 'dsn' => 'mysql:host=localhost;dbname=yii2basic;port=3307',
+    // 'username' => 'root',
+    // 'password' => '',
+    // 'charset' => 'utf8',
+
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic;port=3307',
-    'username' => 'root',
-    'password' => '',
+    'dsn' => 'mysql:host=' . $host . ';dbname=' . $dbname . ';port=' . $port . '',
+    'username' => $username,
+    'password' => $password,
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

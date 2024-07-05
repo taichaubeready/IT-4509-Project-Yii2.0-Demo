@@ -48,8 +48,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                // 'route' => 'friendly/home',
-                // 'suffix' => '.net',
+                'lien-he' => 'site/contact',
+                'suffix' => '.html',
             ],
         ],
 
