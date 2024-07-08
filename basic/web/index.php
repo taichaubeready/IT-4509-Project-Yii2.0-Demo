@@ -12,11 +12,11 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__.'/../.env');
 
-// overwrites existing env variables
-$dotenv->overload(__DIR__.'/../.env');
+// // overwrites existing env variables
+// $dotenv->overload(__DIR__.'/../.env');
 
-// loads .env, .env.local, and .env.$APP_ENV.local or .env.$APP_ENV
-$dotenv->loadEnv(__DIR__.'/../.env');
+// // loads .env, .env.local, and .env.$APP_ENV.local or .env.$APP_ENV
+// $dotenv->loadEnv(__DIR__.'/../.env');
 
 $config = require __DIR__ . '/../config/web.php';
 

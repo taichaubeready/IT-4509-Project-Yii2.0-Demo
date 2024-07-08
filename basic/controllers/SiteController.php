@@ -111,13 +111,16 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
 
-            // Tạo model Contact để thêm dữ liệu vào DB contact, khi user thao tác trên form Contact tại localhost:8000/site/contact
-            $new_contact = new Contact();
-            $new_contact->name = $model->name;
-            $new_contact->email = $model->email;
-            $new_contact->subject = $model->subject;
-            $new_contact->body = $model->body;
-            $new_contact->insert();
+            // // Tạo model Contact để thêm dữ liệu vào DB contact, khi user thao tác trên form Contact tại localhost:8000/site/contact
+            // $new_contact = new Contact();
+            // $new_contact->name = $model->name;
+            // $new_contact->email = $model->email;
+            // $new_contact->subject = $model->subject;
+            // $new_contact->body = $model->body;
+            // $new_contact->insert();
+
+            // Hàm insert() xử lý tác vụ submit form
+            $model->insert();
 
             Yii::$app->session->setFlash('contactFormSubmitted');
 

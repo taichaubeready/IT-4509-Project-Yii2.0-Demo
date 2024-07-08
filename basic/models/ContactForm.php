@@ -71,4 +71,22 @@ class ContactForm extends Model
     public function getAllContacts(){
         return Contact::find()->all();
     }
+
+    /**
+     * Hàm insert data from submit form
+     */
+    public function insert()
+    {
+        $model = new Contact();
+        $model->name = $this->name;
+        $model->email = $this->email;
+        $model->subject = $this->subject;
+        $model->body = $this->body;
+        //$model->insert();
+        $model->save();
+
+        // $model->setAttributes($this->getAttributes());
+
+        // $model->save();
+    }
 }
