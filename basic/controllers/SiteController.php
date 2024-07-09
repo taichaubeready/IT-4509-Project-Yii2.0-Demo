@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\SendMailJob;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -10,7 +11,6 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
-use app\models\Contact;
 
 class SiteController extends Controller
 {
@@ -131,20 +131,12 @@ class SiteController extends Controller
     //  */
     // public function actionSendMail()
     // {
-    //     // Yii::$app->mailer->compose()
-    //     //     ->setTo("nhattai0501@gmail.com")
-    //     //     ->setFrom("tai.chau@beready.academy")
-    //     //     ->setSubject("TEST")
-    //     //     ->setTextBody("<b>This is test body</b>")
-    //     //     ->send();
-
-    //     Yii::$app->mailer->compose()
-    //         ->setFrom('tai.chau@beready.academy')
-    //         ->setTo('nhattai0501@gmail.com')
-    //         ->setReplyTo('tai.chau@beready.academy')
-    //         ->setSubject('TEST')
-    //         ->setTextBody('<b>This is test body</b>')
-    //         ->send();
+    //     Yii::$app->queue->push(new SendMailJob([
+    //         'name' => 'test1',
+    //         'email' => 'nhattai0501@gmail.com',
+    //         'subject' => 'GMAIL TEST QUEUE JOB',
+    //         'body' => 'This is test',
+    //     ]));
     // }
 
     /**

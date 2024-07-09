@@ -108,5 +108,14 @@ class ContactForm extends Model
             ->setSubject($model->subject)
             ->setTextBody($model->body)
             ->send();
+
+
+        // // Dùng queue để thêm email
+        // Yii::$app->queue->push(new SendMailJob([
+        //     'name' => $this->name,
+        //     'email'=> $email,
+        //     'subject'=> $this->subject,
+        //     'body'=> $this->body
+        // ]));
     }
 }
