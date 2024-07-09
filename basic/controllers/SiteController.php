@@ -111,16 +111,11 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
 
-            // // Tạo model Contact để thêm dữ liệu vào DB contact, khi user thao tác trên form Contact tại localhost:8000/site/contact
-            // $new_contact = new Contact();
-            // $new_contact->name = $model->name;
-            // $new_contact->email = $model->email;
-            // $new_contact->subject = $model->subject;
-            // $new_contact->body = $model->body;
-            // $new_contact->insert();
-
-            // Hàm insert() xử lý tác vụ submit form
+            // Hàm insert() xử lý tác vụ submit form - Thêm dữ liệu contact vào DB
             $model->insert();
+
+            // Gửi mail to mail trong form
+            $model->sendMail($model->email);
 
             Yii::$app->session->setFlash('contactFormSubmitted');
 
@@ -130,6 +125,27 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    // /**
+    //  * Test Send Email
+    //  */
+    // public function actionSendMail()
+    // {
+    //     // Yii::$app->mailer->compose()
+    //     //     ->setTo("nhattai0501@gmail.com")
+    //     //     ->setFrom("tai.chau@beready.academy")
+    //     //     ->setSubject("TEST")
+    //     //     ->setTextBody("<b>This is test body</b>")
+    //     //     ->send();
+
+    //     Yii::$app->mailer->compose()
+    //         ->setFrom('tai.chau@beready.academy')
+    //         ->setTo('nhattai0501@gmail.com')
+    //         ->setReplyTo('tai.chau@beready.academy')
+    //         ->setSubject('TEST')
+    //         ->setTextBody('<b>This is test body</b>')
+    //         ->send();
+    // }
 
     /**
      * Displays about page.

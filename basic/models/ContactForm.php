@@ -68,7 +68,8 @@ class ContactForm extends Model
      * Get All Contacts
      *
      */
-    public function getAllContacts(){
+    public function getAllContacts()
+    {
         return Contact::find()->all();
     }
 
@@ -82,11 +83,30 @@ class ContactForm extends Model
         $model->email = $this->email;
         $model->subject = $this->subject;
         $model->body = $this->body;
-        //$model->insert();
         $model->save();
 
         // $model->setAttributes($this->getAttributes());
 
         // $model->save();
+    }
+
+    /**
+     * Hàm gửi mail
+     */
+    public function sendMail($email)
+    {
+        $model = new Contact();
+        $model->name = $this->name;
+        $model->email = $this->email;
+        $model->subject = $this->subject;
+        $model->body = $this->body;
+
+        Yii::$app->mailer->compose()
+            ->setTo($email)
+            ->setFrom(Yii::$app->params['senderEmail'])
+            ->setReplyTo($model->email)
+            ->setSubject($model->subject)
+            ->setTextBody($model->body)
+            ->send();
     }
 }
