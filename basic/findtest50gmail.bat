@@ -1,0 +1,1 @@
+ php yii contact/find-mail-contact test50@gmail.com
