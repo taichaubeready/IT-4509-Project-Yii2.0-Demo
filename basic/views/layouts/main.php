@@ -64,7 +64,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
         <?php endif ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+        <!-- <?= $content ?> -->
+        <?php echo $content ?>
     </div>
 </main>
 
