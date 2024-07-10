@@ -3,6 +3,9 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
+$mail_username = $_ENV['MAIL_USERNAME'];
+$mail_password = $_ENV['MAIL_PASSWORD'];
+
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -38,8 +41,8 @@ $config = [
             'transport' => [
                 'scheme' => 'smtp',
                 'host' => 'smtp.gmail.com',
-                'username' => 'tai.chau@beready.academy',
-                'password' => 'wrqx jgld cgkm jtih',
+                'username' => $mail_username,
+                'password' => $mail_password,
                 'port' => 465,
             ],
             'viewPath' => '@app/mail',

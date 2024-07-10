@@ -21,7 +21,7 @@ use app\models\User;
     <?= $form->field($model, 'username') ?>
     <?= $form->field($model, 'password')->passwordInput() ?>
     <?= $form->field($model, 'name')->dropDownList(['Nam' => 'Nam', 'Nu' => 'Nu'], ['prompt' => 'Chon gioi tinh']) ?>
-    <?= $form->field($model, 'email')->dropDownList(ArrayHelper::map(User::find()->where(['id_user' => '1'])->all(), 'id_user', 'username')) ?>
+    <?= $form->field($model, 'email')->dropDownList(ArrayHelper::map(User::find()->where(['id' => '1'])->all(), 'id', 'username')) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>

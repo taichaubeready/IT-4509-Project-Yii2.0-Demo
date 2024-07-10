@@ -1,0 +1,1 @@
+php yii seeder-user/get-seeder
