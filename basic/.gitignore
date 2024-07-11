@@ -35,3 +35,4 @@ tests/_support/_generated
 .env
 .env.example
 composer.lock
+node_modules/

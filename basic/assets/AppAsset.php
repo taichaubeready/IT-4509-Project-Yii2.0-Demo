@@ -23,9 +23,10 @@ class AppAsset extends AssetBundle
         'css/tw.css',
     ];
     public $js = [
+        'js/alpine.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap5\BootstrapAsset'
+        // 'yii\bootstrap5\BootstrapAsset'
     ];
 }
