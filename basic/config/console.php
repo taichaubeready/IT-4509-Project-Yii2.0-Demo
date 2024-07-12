@@ -3,6 +3,9 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
+$mail_username = $_ENV['MAIL_USERNAME'];
+$mail_password = $_ENV['MAIL_PASSWORD'];
+
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
@@ -10,7 +13,7 @@ $config = [
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
     'components' => [
@@ -20,6 +23,15 @@ $config = [
             'tableName' => '{{%queue}}', // Table name
             'channel' => 'default', // Queue channel key
             'mutex' => \yii\mutex\MysqlMutex::class, // Mutex used to sync queries
+            'as log' => \yii\queue\LogBehavior::class,
+        ],
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => null,
+            'migrationNamespaces' => [
+                // ...
+                'yii\queue\db\migrations',
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -33,6 +45,25 @@ $config = [
             ],
         ],
         'db' => $db,
+
+        'mailer' => [
+            'class' => \yii\symfonymailer\Mailer::class,
+            'transport' => [
+                'scheme' => 'smtp',
+                'host' => 'smtp.gmail.com',
+                'username' => $mail_username,
+                'password' => $mail_password,
+                'port' => 465,
+            ],
+            'viewPath' => '@app/mail',
+            // send all mails to a file by default.
+            'useFileTransport' => false,
+        ],
+
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'scriptUrl' => 'http://myurl'
+        ]
     ],
     'params' => $params,
     /*

@@ -15,11 +15,10 @@ class SendMailJob extends BaseObject implements \yii\queue\JobInterface
     {
         Yii::$app->mailer->compose()
         ->setTo($this->email)
-        ->setFrom(Yii::$app->params['senderEmail'])
-        ->setReplyTo($this->email)
+        ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+        ->setReplyTo([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']] )
         ->setSubject($this->subject)
         ->setTextBody($this->body)
         ->send();
-
     }
 }

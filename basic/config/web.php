@@ -9,7 +9,7 @@ $mail_password = $_ENV['MAIL_PASSWORD'];
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'queue'],
+    'bootstrap' => ['log','queue'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -21,6 +21,7 @@ $config = [
             'tableName' => '{{%queue}}', // Table name
             'channel' => 'default', // Queue channel key
             'mutex' => \yii\mutex\MysqlMutex::class, // Mutex used to sync queries
+            'as log' => \yii\queue\LogBehavior::class,
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

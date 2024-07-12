@@ -95,21 +95,21 @@ class ContactForm extends Model
      */
     public function sendMail($email)
     {
-        Yii::$app->mailer->compose()
-            ->setTo($email)
-            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-            ->setReplyTo([Yii::$app->params['senderEmail'] => $this->name])
-            ->setSubject($this->subject)
-            ->setTextBody($this->body)
-            ->send();
+        // Yii::$app->mailer->compose()
+        //     ->setTo($email)
+        //     ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+        //     ->setReplyTo([Yii::$app->params['senderEmail'] => $this->name])
+        //     ->setSubject($this->subject)
+        //     ->setTextBody($this->body)
+        //     ->send();
 
 
-        // // Dùng queue để thêm email
-        // Yii::$app->queue->push(new SendMailJob([
-        //     'name' => $this->name,
-        //     'email'=> $email,
-        //     'subject'=> $this->subject,
-        //     'body'=> $this->body
-        // ]));
+        // Dùng queue job để thêm email
+        Yii::$app->queue->push(new SendMailJob([
+            'name' => $this->name,
+            'email'=> $email,
+            'subject'=> $this->subject,
+            'body'=> $this->body
+        ]));
     }
 }

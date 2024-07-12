@@ -108,8 +108,9 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+        // && $model->contact(Yii::$app->params['adminEmail'])
+        
+        if ($model->load(Yii::$app->request->post())) {
 
             // Hàm insert() xử lý tác vụ submit form - Thêm dữ liệu contact vào DB
             $model->insert();
@@ -126,18 +127,24 @@ class SiteController extends Controller
         ]);
     }
 
-    // /**
-    //  * Test Send Email
-    //  */
-    // public function actionSendMail()
-    // {
-    //     Yii::$app->queue->push(new SendMailJob([
-    //         'name' => 'test1',
-    //         'email' => 'nhattai0501@gmail.com',
-    //         'subject' => 'GMAIL TEST QUEUE JOB',
-    //         'body' => 'This is test',
-    //     ]));
-    // }
+    /**
+     * Test Send Email
+     */
+    public function actionSendMail()
+    {
+        if (
+            Yii::$app->queue->push(new SendMailJob([
+                'name' => 'test1',
+                'email' => 'nhattai0501@gmail.com',
+                'subject' => 'GMAIL TEST QUEUE JOB',
+                'body' => 'This is test',
+            ]))
+        ) {
+            echo "Queue is Ok!";
+        } else {
+            echo "Queue is not Ok!";
+        }
+    }
 
     /**
      * Displays about page.

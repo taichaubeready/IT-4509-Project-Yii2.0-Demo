@@ -11,8 +11,8 @@
     "build-tailwindcss": "npx tailwindcss -i ./web/css/main.css -o ./web/css/tw.css --watch",
     "build-alpinejs": "npx esbuild ./web/js/app.js --outfile=./web/js/alpine.js --bundle --watch",
     "serve": "concurrently \"postcss ./web/css/main.css -o ./web/css/tw.css --watch\"  \"live-server ./src\"",
-    "development": "postcss ./web/css/main.css -o ./web/css/tw.css",
-    "production": "postcss ./web/css/main.css -o ./web/css/tw.css",
+    "development": "postcss ./web/css/main.css -o ./web/css/tw.css --watch",
+    "production": "postcss ./web/css/main.css -o ./web/css/tw.css --watch",
     "start": "npm run serve"
   },
   "keywords": [],
