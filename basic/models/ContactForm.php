@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use app\models\Contact;
+use app\job\SendMailJob;
 
 /**
  * ContactForm is the model behind the contact form.
@@ -104,12 +105,18 @@ class ContactForm extends Model
         //     ->send();
 
 
+        // // Dùng queue job để thêm email
+        // Yii::$app->queue->push(new SendMailJob([
+        //     'name' => $this->name,
+        //     'email'=> $email,
+        //     'subject'=> $this->subject,
+        //     'body'=> $this->body
+        // ]));
+
+
         // Dùng queue job để thêm email
         Yii::$app->queue->push(new SendMailJob([
-            'name' => $this->name,
-            'email'=> $email,
-            'subject'=> $this->subject,
-            'body'=> $this->body
+            'email' => $email,
         ]));
     }
 }

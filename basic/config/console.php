@@ -43,6 +43,36 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+            [
+
+                'class' => 'yii\log\FileTarget',
+
+                'enabled' => true,
+
+                'categories' => ['api', 'cron', 'yii\queue\Queue', 'queue', 'collection', 'firewall'],
+
+                'levels' => ['error', 'warning', 'trace'],
+
+                'enableRotation' => true,
+
+                'logFile' => '@runtime/logs/queue.log',
+
+                'logVars' => [],
+
+            ],
+            [
+
+                'class' => 'yii\log\FileTarget',
+
+                'levels' => ['error', 'warning', 'trace'],
+
+                'logVars' => [],
+
+                'logFile' => '@runtime/logs/commands.log',
+
+                'enabled' => true,
+
+            ]
         ],
         'db' => $db,
 

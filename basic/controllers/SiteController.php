@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\SendMailJob;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -11,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
+use app\job\SendMailJob;
 
 class SiteController extends Controller
 {
@@ -121,6 +121,7 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
+
         }
         return $this->render('contact', [
             'model' => $model,
@@ -134,10 +135,7 @@ class SiteController extends Controller
     {
         if (
             Yii::$app->queue->push(new SendMailJob([
-                'name' => 'test1',
                 'email' => 'nhattai0501@gmail.com',
-                'subject' => 'GMAIL TEST QUEUE JOB',
-                'body' => 'This is test',
             ]))
         ) {
             echo "Queue is Ok!";
